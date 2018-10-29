@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux'
+import {addTodoItem} from '../../ducks/reducer'
+
 
 import "./Form.css";
 import plus from "./../../assets/add_red.svg";
@@ -26,11 +29,17 @@ class Form extends Component {
             value={this.state.name}
             onChange={e => this.handleInput(e.target.value)}
           />
-          <img src={plus} alt="add" onClick={() => console.log('I need an action builder')} />
+          <img src={plus} alt="add" onClick={() => this.props.addTodoItem(this.state.name)} />
         </div>
       </div>
     );
   }
 }
 
-export default Form;
+
+
+const matchFunctionsToProps ={
+  addTodoItem
+}
+
+export default connect(null, matchFunctionsToProps)(Form);
